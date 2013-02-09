@@ -7,10 +7,20 @@
 <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
-	<div class="main">
+	<div data-element="main" class="main">
 	</div>
 
-  <script type="x-handlebars-template" id="welcome-template">
+  <script type="x-handlebars-template" id="timer-template">
+    <div data-element="timer">
+      {{currentTime}}
+    </div>
+  </script>
+
+  <script type="x-handlebars-template" id="blinds-template">
+    <h1>Blinds: </h1>
+    <div data-element="blind">
+      {{currentBlind}}
+    </div>
   </script>
 
   <script src="vendors/base.js"></script>

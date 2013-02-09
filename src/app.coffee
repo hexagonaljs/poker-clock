@@ -3,14 +3,18 @@
 #<< use_case
 #<< gui
 #<< glue
+#<< clock
+#<< timer
 
 class App
   constructor: ->
-    useCase      = new UseCase()
+    clock        = new Clock()
+    timer        = new Timer()
+    useCase      = new UseCase(clock)
     gui          = new Gui()
     localStorage = new LocalStorage("app")
-    glue         = new Glue(useCase, gui, localStorage)
-    
+    glue         = new Glue(useCase, gui, localStorage, timer, clock)
+
     useCase.start()
 
 new App()
