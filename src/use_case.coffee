@@ -15,6 +15,8 @@ class UseCase
   start: =>
     @clock.reset()
 
+  setRoundLength: (@roundLengthInSeconds) =>
+
   blindAdded: (blind) =>
     @blinds.add(blind)
 

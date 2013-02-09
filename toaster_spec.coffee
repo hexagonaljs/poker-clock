@@ -1,7 +1,8 @@
-# => SRC FOLDER
+# KILL ME PLEASE
 toast 'src'
 
-	exclude: ['src/spec']
+	# EXCLUDED FOLDERS (optional)
+	exclude: ['src/app']
 
 	# => VENDORS (optional)
   # vendors: ['vendors/underscore.js']
@@ -14,5 +15,5 @@ toast 'src'
 
 	# => HTTPFOLDER (optional), RELEASE / DEBUG (required)
 	httpfolder: 'release'
-	release: 'release/app.js'
-	debug: 'release/app-debug.js'
+	release: 'release/spec.js'
+	debug: 'release/spec-debug.js'

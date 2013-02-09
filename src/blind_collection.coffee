@@ -10,3 +10,6 @@ class BlindCollection
 
   current: =>
     @blinds[@currentIndex]
+
+  indexOf: (blind) =>
+    @blinds.indexOf(blind)
