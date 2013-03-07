@@ -4,25 +4,35 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>hexagonal.js • starter app</title>
-<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="release/css/normalize.css" />
+<link rel="stylesheet" href="release/css/app.css" />
+<script src="vendors/custom.modernizr.js"></script>
 </head>
 <body>
-	<div data-element="main" class="main"></div>
+  <div data-element="main" class="main">
+    <div class="row">
+      <h2>Hexagonal Poker Clock</h2>
+    </div>
+    <div class="row">
+      <div class="large-5 columns" data-element="timer"></div>
+      <div class="large-6 columns" data-element="blinds"></div>
+    </div>
+  </div>
 
   <script type="x-handlebars-template" id="timer-template">
-    <div data-element="timer">
-      {{currentTime}}
+    <div class="panel">
+      <h4>Minutes Seconds</h4>
+      <h1>{{currentMinute}} : {{currentSecond}}</h1>
     </div>
   </script>
 
   <script type="x-handlebars-template" id="blinds-template">
-    <h1>Blinds: </h1>
-    <div data-element="blind">
-      {{currentBlind}}
+    <div class="panel">
+      <h4>Small Blind / Big Blind</h4>
+      <h1>{{smallBlind}} / {{bigBlind}}</h1>
     </div>
   </script>
 
-  <script src="vendors/base.js"></script>
   <script src="vendors/jquery-1.7.2.min.js" type="text/javascript"></script>
   <script src="vendors/jquery.json-2.3.min.js" type="text/javascript"></script>
   <script src="vendors/uuid.js" type="text/javascript"></script>
@@ -31,6 +41,7 @@
   <script src="vendors/sugar-1.3.min.js" type="text/javascript"></script>
   <script src="vendors/handlebars-1.0.0.beta.6.js" type="text/javascript"></script>
   <script src="vendors/YouAreDaBomb.js" type="text/javascript"></script>
+  <script src="vendors/foundation.min.js"></script>
   <script src="release/app-debug.js" type="text/javascript"></script> 
 </body>
 </html>

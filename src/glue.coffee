@@ -4,9 +4,9 @@ class Glue
     LogAll(@gui)
 
     After(@useCase, 'start', =>
-      @gui.createTimer()
-      @gui.createBlinds(@useCase.currentBlind()))
+      @gui.updateTimer(@clock)
+      @gui.updateBlinds(@useCase.currentBlind()))
     After(@useCase, 'secondElapsed', => @gui.updateTimer(@clock))
-    After(@useCase, 'switchToNextRound', => @gui.updateBlind(@useCase.currentBlind()))
+    After(@useCase, 'switchToNextRound', => @gui.updateBlinds(@useCase.currentBlind()))
 
     After(@timer, 'tick', => @useCase.secondElapsed())

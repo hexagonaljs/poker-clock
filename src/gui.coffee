@@ -1,24 +1,21 @@
 class Gui
   constructor: ->
 
-  createTimer: =>
+  updateTimer: (duration) =>
+    minutes = duration.minutes().pad(2)
+    seconds = duration.seconds().pad(2)
     source = $('#timer-template').html()
     template = Handlebars.compile(source)
-    data = {currentTime: '00:00'}
+    data = {currentMinute: minutes, currentSecond: seconds}
     html = template(data)
     element = $(html)
-    $('[data-element=main]').append(element)
+    $('[data-element=timer]').html(element)
 
-  createBlinds: (blind) =>
+  updateBlinds: (blind) =>
+    console.log('updateBlinds', blind)
     source = $('#blinds-template').html()
     template = Handlebars.compile(source)
-    data = {currentBlind: blind.toString()}
+    data = {smallBlind: blind.small, bigBlind: blind.big}
     html = template(data)
     element = $(html)
-    $('[data-element=main]').append(element)
-
-  updateTimer: (duration) =>
-    $('[data-element=timer]').html(duration.toString())
-
-  updateBlind: (blind) =>
-    $('[data-element=blind]').html(blind.toString())
+    $('[data-element=blinds]').html(element)
