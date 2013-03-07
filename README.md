@@ -9,3 +9,9 @@ Developing
 $ toaster -dw
 $ compass watch
 $ open index.html
+
+Running tests
+=============
+
+$ toaster -dw -f toaster_spec.coffee
+$ open SpecRunner.html
