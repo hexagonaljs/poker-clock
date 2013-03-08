@@ -6,12 +6,13 @@ Always know when it's time to increase blinds during Holdem Poker tournament gam
 Developing
 ==========
 
-    $ toaster -dw
-    $ compass watch
+You need Ruby and Node.js installed
+
+    $ bundle
+    $ foreman start
     $ open index.html
 
-Running tests
-=============
+To run tests:
 
-    $ toaster -dw -f toaster_spec.coffee
     $ open SpecRunner.html
+
