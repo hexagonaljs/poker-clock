@@ -1,5 +1,8 @@
 class Gui
   constructor: ->
+    $('[data-role=start]').click => @startClicked()
+
+  startClicked: ->
 
   updateTimer: (duration) =>
     minutes = duration.minutes().pad(2)
@@ -12,6 +15,9 @@ class Gui
     data = {smallBlind: blind.small, bigBlind: blind.big}
     element = @renderElement('#blinds-template', data)
     $('[data-element=blinds]').html(element)
+
+  hideSetup: ->
+    $('[data-element=setup]').hide()
 
   renderElement: (template, data) ->
     source = $(template).html()

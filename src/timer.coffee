@@ -1,5 +1,7 @@
 class Timer
   constructor: ->
+
+  start: ->
     setInterval((=> @tick()), @oneSecondInMilliseconds())
 
   tick: ->
