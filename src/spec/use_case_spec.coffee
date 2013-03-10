@@ -4,13 +4,13 @@
 
 describe 'UseCase', ->
   beforeEach =>
-    @clock = new Clock()
-    @useCase = new UseCase(@clock)
+    @round = new Round(new Duration(1))
+    @useCase = new UseCase(@round)
 
-  it "resets clock on start", =>
-    spyOn(@clock, 'reset')
+  it "resets round on start", =>
+    spyOn(@round, 'reset')
     @useCase.start()
-    expect(@clock.reset).toHaveBeenCalled()
+    expect(@round.reset).toHaveBeenCalled()
 
   it "adds a blind", =>
     blind = new Blind(10, 20)
@@ -19,10 +19,10 @@ describe 'UseCase', ->
 
   describe 'when time changed', =>
 
-    it 'adds one second to clock', =>
-      spyOn(@clock, 'addSecond')
+    it 'sets next seconds in the round', =>
+      spyOn(@round, 'nextSecond')
       @useCase.secondElapsed()
-      expect(@clock.addSecond).toHaveBeenCalled()
+      expect(@round.nextSecond).toHaveBeenCalled()
 
     it 'does not switch to next round until current has finished', =>
       spyOn(@useCase, 'switchToNextRound')
@@ -38,10 +38,10 @@ describe 'UseCase', ->
 
   describe 'switch to next round', =>
 
-    it 'resets clock', =>
-      spyOn(@clock, 'reset')
+    it 'resets round', =>
+      spyOn(@round, 'reset')
       @useCase.switchToNextRound()
-      expect(@clock.reset).toHaveBeenCalled()
+      expect(@round.reset).toHaveBeenCalled()
 
     it 'increases blinds', =>
       oldBlind = @useCase.currentBlind()
@@ -55,11 +55,9 @@ describe 'UseCase', ->
 
     it 'increases round length by one', =>
       @useCase.increaseRoundLength()
-      newRoundLength = @useCase.roundLength.toMinutes()
-      expect(newRoundLength).toEqual(11)
+      expect(@round.lengthInMinutes()).toEqual(11)
 
     it 'decreases round length by one', =>
       @useCase.decreaseRoundLength()
-      newRoundLength = @useCase.roundLength.toMinutes()
-      expect(newRoundLength).toEqual(9)
+      expect(@round.lengthInMinutes()).toEqual(9)
 

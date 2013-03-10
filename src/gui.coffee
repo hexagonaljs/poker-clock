@@ -10,14 +10,14 @@ class Gui
 
   decreaseRoundLengthClicked: ->
 
-  updateRoundLength: (roundLength) ->
-    data = {roundLength: roundLength.toMinutes()}
+  updateRoundLength: (round) ->
+    data = {roundLength: round.lengthInMinutes()}
     element = @renderElement('#round-template', data)
     $('[data-element=round-length]').html(element)
 
-  updateTimer: (duration) =>
-    minutes = duration.minutes().pad(2)
-    seconds = duration.seconds().pad(2)
+  updateTimeLeft: (timeLeft) =>
+    minutes = timeLeft.minutes().pad(2)
+    seconds = timeLeft.seconds().pad(2)
     data = {currentMinute: minutes, currentSecond: seconds}
     element = @renderElement('#timer-template', data)
     $('[data-element=timer]').html(element)

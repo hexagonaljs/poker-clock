@@ -4,16 +4,14 @@
 #<< gui
 #<< glue
 #<< clock
-#<< timer
 
 class App
   constructor: ->
     clock        = new Clock()
-    timer        = new Timer()
-    useCase      = new UseCase(clock)
+    useCase      = new UseCase()
     gui          = new Gui()
     localStorage = new LocalStorage("app")
-    glue         = new Glue(useCase, gui, localStorage, timer, clock)
+    glue         = new Glue(useCase, gui, localStorage, clock)
 
     useCase.setup()
 

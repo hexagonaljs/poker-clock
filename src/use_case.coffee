@@ -1,9 +1,10 @@
 #<< blind
 #<< blind_collection
 #<< round_length
+#<< duration
 
 class UseCase
-  constructor: (@clock) ->
+  constructor: (@round = new Round(new Duration(1))) ->
     @blinds = new BlindCollection [
       new Blind(10, 20)
       new Blind(15, 30)
@@ -11,37 +12,33 @@ class UseCase
       new Blind(50, 100)
       new Blind(10, 200)
     ]
-    @roundLength = new RoundLength()
 
   setup: =>
     @setRoundLength(1)
 
   start: =>
-    @clock.reset()
+    @round.reset()
 
-  setRoundLength: (roundLengthInMinutes) =>
-    @roundLength.update(roundLengthInMinutes)
+  setRoundLength: (lengthInMinutes) =>
+    @round.setLength(lengthInMinutes)
 
   increaseRoundLength: =>
-    @roundLength.increase()
+    @round.changeLengthBy(1)
 
   decreaseRoundLength: =>
-    @roundLength.decrease()
+    @round.changeLengthBy(-1)
 
   blindAdded: (blind) =>
     @blinds.add(blind)
 
   secondElapsed: =>
-    @clock.addSecond()
-    if @shouldSwitchToNextRound()
+    @round.nextSecond()
+    if @round.isFinished()
       @switchToNextRound()
 
   switchToNextRound: =>
     @blinds.next()
-    @clock.reset()
+    @round.reset()
 
   currentBlind: =>
     @blinds.current()
-
-  shouldSwitchToNextRound: =>
-    @clock.secondsInTotal() is @roundLength.toSeconds()
