@@ -1,2 +1,6 @@
 .idea
-release
+release/*.js
+release/*.css
+release/toaster
+release/css
+

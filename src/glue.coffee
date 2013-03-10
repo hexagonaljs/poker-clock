@@ -10,7 +10,15 @@ class Glue
       @gui.updateBlinds(@useCase.currentBlind()))
     After(@useCase, 'secondElapsed', => @gui.updateTimer(@clock))
     After(@useCase, 'switchToNextRound', => @gui.updateBlinds(@useCase.currentBlind()))
+    AfterAll(@useCase, [
+      'setRoundLength',
+      'increaseRoundLength',
+      'decreaseRoundLength'],
+      => @gui.updateRoundLength(@useCase.roundLength))
+
 
     After(@timer, 'tick', => @useCase.secondElapsed())
 
     After(@gui, 'startClicked', => @useCase.start())
+    After(@gui, 'increaseRoundLengthClicked', => @useCase.increaseRoundLength())
+    After(@gui, 'decreaseRoundLengthClicked', => @useCase.decreaseRoundLength())

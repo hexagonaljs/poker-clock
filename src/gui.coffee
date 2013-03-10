@@ -1,8 +1,19 @@
 class Gui
   constructor: ->
     $('[data-role=start]').click => @startClicked()
+    $('[data-role=increase-round-length]').click => @increaseRoundLengthClicked()
+    $('[data-role=decrease-round-length]').click => @decreaseRoundLengthClicked()
 
   startClicked: ->
+
+  increaseRoundLengthClicked: ->
+
+  decreaseRoundLengthClicked: ->
+
+  updateRoundLength: (roundLength) ->
+    data = {roundLength: roundLength.toMinutes()}
+    element = @renderElement('#round-template', data)
+    $('[data-element=round-length]').html(element)
 
   updateTimer: (duration) =>
     minutes = duration.minutes().pad(2)

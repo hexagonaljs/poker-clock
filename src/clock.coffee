@@ -5,6 +5,9 @@ class Clock
   addSecond: =>
     @secondsElapsed += 1
 
+  secondsInTotal: =>
+    @secondsElapsed
+
   seconds: =>
     @secondsElapsed % 60
 
@@ -13,6 +16,3 @@ class Clock
 
   reset: =>
     @secondsElapsed = 0
-
-  toString: =>
-    "#{@minutes().pad(2)}:#{@seconds().pad(2)}"

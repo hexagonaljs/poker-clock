@@ -15,5 +15,7 @@ class App
     localStorage = new LocalStorage("app")
     glue         = new Glue(useCase, gui, localStorage, timer, clock)
 
+    useCase.setup()
+
 new App()
 

@@ -1,5 +1,6 @@
 #<< blind
 #<< blind_collection
+#<< round_length
 
 class UseCase
   constructor: (@clock) ->
@@ -10,12 +11,22 @@ class UseCase
       new Blind(50, 100)
       new Blind(10, 200)
     ]
-    @roundLengthInSeconds = 5
+    @roundLength = new RoundLength()
+
+  setup: =>
+    @setRoundLength(1)
 
   start: =>
     @clock.reset()
 
-  setRoundLength: (@roundLengthInSeconds) =>
+  setRoundLength: (roundLengthInMinutes) =>
+    @roundLength.update(roundLengthInMinutes)
+
+  increaseRoundLength: =>
+    @roundLength.increase()
+
+  decreaseRoundLength: =>
+    @roundLength.decrease()
 
   blindAdded: (blind) =>
     @blinds.add(blind)
@@ -33,4 +44,4 @@ class UseCase
     @blinds.current()
 
   shouldSwitchToNextRound: =>
-    @clock.seconds() is @roundLengthInSeconds
+    @clock.secondsInTotal() is @roundLength.toSeconds()
