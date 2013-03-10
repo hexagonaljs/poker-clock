@@ -33,6 +33,12 @@
           </div>
         </div>
       </div>
+      <div class="large-6 columns">
+        <div class="panel">
+          <h4>Select blinds</h4>
+          <div data-element="blinds-selection"></div>
+        </div>
+      </div>
     </div>
   </div>
   <div data-element="main" class="main">
@@ -44,6 +50,14 @@
 
   <script type="x-handlebars-template" id="round-template">
     <h1>{{roundLength}}</h1>
+  </script>
+
+  <script type="x-handlebars-template" id="blinds-selection-template">
+    <ul class="large-block-grid-4">
+      {{#each blinds}}
+      <li><button class="button small" data-blind-id="{{@index}}">{{small}} / {{big}}</button></li>
+      {{/each}}
+    </ul>
   </script>
 
   <script type="x-handlebars-template" id="timer-template">

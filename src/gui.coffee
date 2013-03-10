@@ -10,10 +10,27 @@ class Gui
 
   decreaseRoundLengthClicked: ->
 
+  addBlindClicked: (blind) ->
+
+  removeBlindClicked: (blind) ->
+
   updateRoundLength: (round) ->
     data = {roundLength: round.lengthInMinutes()}
     element = @renderElement('#round-template', data)
     $('[data-element=round-length]').html(element)
+
+  updateSelectedBlinds: (availableBlinds, enabledBlinds) =>
+    data = {blinds: availableBlinds.all()}
+    element = @renderElement('#blinds-selection-template', data)
+    $('[data-element=blinds-selection]').html(element)
+    console.log('enab', enabledBlinds)
+    availableBlinds.each (blind) =>
+      element = @getElementForBlind(availableBlinds.indexOf(blind))
+      if enabledBlinds.contains(blind)
+        element.click => @removeBlindClicked(blind)
+      else
+        element.addClass('disabled')
+        element.click => @addBlindClicked(blind)
 
   updateTimeLeft: (timeLeft) =>
     minutes = timeLeft.minutes().pad(2)
@@ -29,6 +46,9 @@ class Gui
 
   hideSetup: ->
     $('[data-element=setup]').hide()
+
+  getElementForBlind: (index) ->
+    $("[data-blind-id=#{index}]")
 
   renderElement: (template, data) ->
     source = $(template).html()

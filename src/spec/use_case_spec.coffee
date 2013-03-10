@@ -14,8 +14,8 @@ describe 'UseCase', ->
 
   it "adds a blind", =>
     blind = new Blind(10, 20)
-    @useCase.blindAdded(blind)
-    expect(@useCase.blinds).toContain(blind)
+    @useCase.addBlind(blind)
+    expect(@useCase.enabledBlinds).toContain(blind)
 
   describe 'when time changed', =>
 

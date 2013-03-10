@@ -1,17 +1,18 @@
 #<< blind
-#<< blind_collection
+#<< collection
 #<< round_length
 #<< duration
 
 class UseCase
   constructor: (@round = new Round(new Duration(1))) ->
-    @blinds = new BlindCollection [
+    @blinds = new Collection [
       new Blind(10, 20)
       new Blind(15, 30)
       new Blind(30, 60)
       new Blind(50, 100)
       new Blind(10, 200)
     ]
+    @enabledBlinds = new Collection []
 
   setup: =>
     @setRoundLength(1)
@@ -28,8 +29,11 @@ class UseCase
   decreaseRoundLength: =>
     @round.changeLengthBy(-1)
 
-  blindAdded: (blind) =>
-    @blinds.add(blind)
+  addBlind: (blind) =>
+    @enabledBlinds.add(blind)
+
+  removeBlind: (blind) =>
+    @enabledBlinds.remove (current) -> current.equals(blind)
 
   secondElapsed: =>
     @round.nextSecond()
