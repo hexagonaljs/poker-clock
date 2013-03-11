@@ -1,6 +1,7 @@
 toast 'src'
   exclude: ['src/spec']
   vendors: [
+    'vendors/custom.modernizr.js'
     'vendors/jquery-1.7.2.min.js'
     'vendors/underscore.js'
     'vendors/sugar-1.3.min.js'
