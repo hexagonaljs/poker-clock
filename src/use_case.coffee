@@ -40,8 +40,8 @@ class UseCase
       @switchToNextRound()
 
   switchToNextRound: =>
-    @blinds.next()
+    @enabledBlinds.next()
     @round.reset()
 
   currentBlind: =>
-    @blinds.current()
+    @enabledBlinds.current()

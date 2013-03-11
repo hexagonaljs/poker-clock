@@ -31,18 +31,27 @@ describe 'UseCase', ->
       185.times @useCase.secondElapsed
       expect(@useCase.switchToNextRound).toHaveBeenCalled()
 
-  describe 'switch to next round', =>
+  describe 'current blinds', =>
+    beforeEach =>
+      @blind = new Blind(10, 20)
+      @useCase.addBlind(@blind)
 
+    it 'points to the first blinds initially', =>
+      expect(@useCase.currentBlind().equals(@blind)).toBe(true)
+
+  describe 'switch to next round', =>
     it 'resets round', =>
       spyOn(@round, 'reset')
       @useCase.switchToNextRound()
       expect(@round.reset).toHaveBeenCalled()
 
     it 'increases blinds', =>
-      oldBlind = @useCase.currentBlind()
+      blinds1 = new Blind(10,20)
+      blinds2 = new Blind(20,40)
+      @useCase.addBlind(blinds1)
+      @useCase.addBlind(blinds2)
       @useCase.switchToNextRound()
-      newBlind = @useCase.currentBlind()
-      expect(newBlind.big).toBeGreaterThan(oldBlind.big)
+      expect(@useCase.currentBlind().equals(blinds2)).toBe(true)
 
   describe 'change round length', =>
     beforeEach =>
@@ -73,3 +82,4 @@ describe 'UseCase', ->
     it 'removes the blind', =>
       @useCase.removeBlind(@blind)
       expect(@useCase.enabledBlinds.contains(@blind)).toBe(false)
+
