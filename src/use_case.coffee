@@ -1,17 +1,17 @@
 #<< blind
-#<< collection
+#<< sorted_blinds_collection
 #<< duration
 
 class UseCase
   constructor: (@round = new Round(new Duration(1))) ->
-    @blinds = new Collection [
+    @blinds = new SortedBlindsCollection [
       new Blind(10, 20)
       new Blind(15, 30)
       new Blind(30, 60)
       new Blind(50, 100)
-      new Blind(10, 200)
+      new Blind(100, 200)
     ]
-    @enabledBlinds = new Collection []
+    @enabledBlinds = new SortedBlindsCollection()
 
   setup: =>
     @setRoundLength(1)
