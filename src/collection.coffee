@@ -5,29 +5,29 @@ class Collection
   add: (item) ->
     @items.push(item)
 
-  next: =>
-    @currentIndex += 1
+  remove: (item) ->
+    @items.remove (current) -> current.equals(item)
 
-  remove: (item) =>
-    @items.remove (current) => current.equals(item)
-
-  all: =>
+  all: ->
     @items
 
-  each: (fn) =>
+  each: (fn) ->
     @items.each(fn)
 
-  current: =>
+  current: ->
     @items[@currentIndex]
 
-  first: =>
+  next: ->
+    @currentIndex += 1
+
+  first: ->
     @items.first()
 
-  last: =>
+  last: ->
     @items.last()
 
-  contains: (searchedItem) =>
+  contains: (searchedItem) ->
     @items.any (item) -> item.equals(searchedItem)
 
-  indexOf: (item) =>
+  indexOf: (item) ->
     @items.indexOf(item)
