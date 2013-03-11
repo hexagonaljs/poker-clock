@@ -1,4 +1,5 @@
-#< collection
+#<< collection
+#<< test_item
 
 describe "Collection", =>
   describe "empty", =>
@@ -22,6 +23,19 @@ describe "Collection", =>
 
     it "current returns added items", =>
       expect(@collection.current()).toEqual(@item)
+
+  describe "remove", =>
+    beforeEach =>
+      @collection = new Collection()
+      @item = new spec.TestItem(1)
+      @collection.add(@item)
+
+    it "contains the item initially", =>
+      expect(@collection.contains(@item)).toBe(true)
+
+    it "removes the item", =>
+      @collection.remove(@item)
+      expect(@collection.contains(@item)).toBe(false)
 
   describe "with 3 items", =>
     beforeEach =>

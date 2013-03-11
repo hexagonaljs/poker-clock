@@ -32,7 +32,7 @@ class UseCase
     @enabledBlinds.add(blind)
 
   removeBlind: (blind) =>
-    @enabledBlinds.remove (current) -> current.equals(blind)
+    @enabledBlinds.remove(blind)
 
   secondElapsed: =>
     @round.nextSecond()

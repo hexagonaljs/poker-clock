@@ -12,11 +12,6 @@ describe 'UseCase', ->
     @useCase.start()
     expect(@round.reset).toHaveBeenCalled()
 
-  it "adds a blind", =>
-    blind = new Blind(10, 20)
-    @useCase.addBlind(blind)
-    expect(@useCase.enabledBlinds).toContain(blind)
-
   describe 'when time changed', =>
 
     it 'sets next seconds in the round', =>
@@ -61,3 +56,20 @@ describe 'UseCase', ->
       @useCase.decreaseRoundLength()
       expect(@round.lengthInMinutes()).toEqual(9)
 
+  describe 'add blinds', =>
+    it 'adds to blind to the enabled blinds array', =>
+      blind = new Blind(10,20)
+      @useCase.addBlind(blind)
+      expect(@useCase.enabledBlinds).toContain(blind)
+
+  describe 'remove blinds', =>
+    beforeEach =>
+      @blind = new Blind(10,20)
+      @useCase.addBlind(@blind)
+
+    it 'contains the blind initially', =>
+      expect(@useCase.enabledBlinds.contains(@blind)).toBe(true)
+
+    it 'removes the blind', =>
+      @useCase.removeBlind(@blind)
+      expect(@useCase.enabledBlinds.contains(@blind)).toBe(false)

@@ -8,6 +8,9 @@ class Collection
   next: =>
     @currentIndex += 1
 
+  remove: (item) =>
+    @items.remove (current) => current.equals(item)
+
   all: =>
     @items
 
