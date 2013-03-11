@@ -1,5 +1,5 @@
 #<< collection
-#<< test_item
+#<< spec/test_item
 
 describe "Collection", =>
   describe "empty", =>

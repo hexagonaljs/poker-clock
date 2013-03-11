@@ -4,11 +4,13 @@
 #<< gui
 #<< glue
 #<< clock
+#<< config
 
 class App
   constructor: ->
     clock        = new Clock()
-    useCase      = new UseCase()
+    round        = new Round(Config.getRoundDuration())
+    useCase      = new UseCase(round, Config.getAvailableBlinds(), Config.getEnabledBlinds())
     gui          = new Gui()
     localStorage = new LocalStorage("app")
     glue         = new Glue(useCase, gui, localStorage, clock)

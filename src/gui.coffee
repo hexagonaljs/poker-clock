@@ -23,13 +23,15 @@ class Gui
     data = {blinds: availableBlinds.all()}
     element = @renderElement('#blinds-selection-template', data)
     $('[data-element=blinds-selection]').html(element)
-    console.log('enab', enabledBlinds)
     availableBlinds.each (blind) =>
       element = @getElementForBlind(availableBlinds.indexOf(blind))
       if enabledBlinds.contains(blind)
         element.click => @removeBlindClicked(blind)
+        element.addClass('success')
+        element.removeClass('secondary')
       else
-        element.addClass('disabled')
+        element.removeClass('success')
+        element.addClass('secondary')
         element.click => @addBlindClicked(blind)
 
   updateTimeLeft: (timeLeft) =>

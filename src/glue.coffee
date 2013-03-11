@@ -3,7 +3,10 @@ class Glue
     LogAll(@useCase)
     LogAll(@gui)
 
-    After(@useCase, 'setup', => @gui.updateSelectedBlinds(@useCase.blinds, @useCase.enabledBlinds))
+    After(@useCase, 'setup', =>
+      @gui.updateSelectedBlinds(@useCase.availableBlinds, @useCase.enabledBlinds)
+      @gui.updateRoundLength(@useCase.round)
+    )
 
     After(@useCase, 'start', =>
       @clock.start()
@@ -20,7 +23,7 @@ class Glue
     AfterAll(@useCase, [
       'addBlind',
       'removeBlind'],
-      => @gui.updateSelectedBlinds(@useCase.blinds, @useCase.enabledBlinds))
+      => @gui.updateSelectedBlinds(@useCase.availableBlinds, @useCase.enabledBlinds))
 
 
     After(@clock, 'tick', => @useCase.secondElapsed())

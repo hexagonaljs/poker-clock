@@ -1,4 +1,4 @@
-#< duration
+#<< duration
 
 class Round
   constructor: (@length) ->
