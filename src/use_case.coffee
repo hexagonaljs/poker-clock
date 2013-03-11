@@ -1,6 +1,5 @@
 #<< blind
 #<< collection
-#<< round_length
 #<< duration
 
 class UseCase
