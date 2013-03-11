@@ -14,5 +14,5 @@ toast 'src'
 
 	# => HTTPFOLDER (optional), RELEASE / DEBUG (required)
 	httpfolder: 'release'
-	release: 'release/app.js'
-	debug: 'release/app-debug.js'
+	release: 'release/poker.js'
+	debug: 'release/poker-debug.js'
