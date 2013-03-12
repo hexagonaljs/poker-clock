@@ -1,6 +1,10 @@
+@import "font-awesome";
 .round-setup {
   .controls {
     margin-top: 1em;
-    i:before { font-size: 60px; margin: 0 25px; }
+    i[class^="icon-"] { font-size: 80px; margin: 0 25px; }
   }
+}
+.main .controls {
+  i[class^="icon-"] { font-size: 60px; }
 }
