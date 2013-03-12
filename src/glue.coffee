@@ -19,6 +19,8 @@ class Glue
       @clock.stop()
       @gui.switchToSetup())
 
+    After(@useCase, 'pause', => @clock.toggle())
+
     After(@useCase, 'secondElapsed', => @gui.updateTimeLeft(@useCase.round.timeLeft()))
     After(@useCase, 'switchToNextRound', => @gui.updateBlinds(@useCase.currentBlind()))
     AfterAll(@useCase, [
@@ -36,6 +38,7 @@ class Glue
 
     After(@gui, 'startClicked', => @useCase.start())
     After(@gui, 'restartClicked', => @useCase.restart())
+    After(@gui, 'pauseClicked', => @useCase.pause())
     After(@gui, 'increaseRoundLengthClicked', => @useCase.increaseRoundLength())
     After(@gui, 'decreaseRoundLengthClicked', => @useCase.decreaseRoundLength())
     After(@gui, 'addBlindClicked', (blind) => @useCase.addBlind(blind))

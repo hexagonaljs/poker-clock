@@ -2,12 +2,15 @@ class Gui
   constructor: ->
     $('[data-role=start]').click => @startClicked()
     $('[data-role=restart]').click => @restartClicked()
+    $('[data-role=pause]').click => @pauseClicked()
     $('[data-role=increase-round-length]').click => @increaseRoundLengthClicked()
     $('[data-role=decrease-round-length]').click => @decreaseRoundLengthClicked()
 
   startClicked: ->
 
   restartClicked: ->
+
+  pauseClicked: ->
 
   increaseRoundLengthClicked: ->
 

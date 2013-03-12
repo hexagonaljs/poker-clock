@@ -38,5 +38,7 @@ class UseCase
     @round.reset()
     @enabledBlinds.reset()
 
+  pause: =>
+
   currentBlind: =>
     @enabledBlinds.current()
