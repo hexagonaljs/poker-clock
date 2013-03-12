@@ -1,5 +1,5 @@
 class Glue
-  constructor: (@pokerClock, @gui, @storage, @clock)->
+  constructor: (@pokerClock, @gui, @clock)->
     LogAll(@pokerClock)
     LogAll(@gui)
 

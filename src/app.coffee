@@ -11,7 +11,7 @@ class App
     round        = new Round(Config.getRoundDuration())
     pokerClock   = new PokerClock(round, Config.getAvailableBlinds(), Config.getEnabledBlinds())
     gui          = new Gui()
-    glue         = new Glue(pokerClock, gui, localStorage, clock)
+    glue         = new Glue(pokerClock, gui, clock)
 
     pokerClock.setup()
 
