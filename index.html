@@ -26,8 +26,12 @@
           <div class="row">
             <div class="large-4 columns" data-element="round-length"></div>
             <div class="large-8 columns controls">
-              <i class="foundicon-plus" data-role="increase-round-length"></i>
-              <i class="foundicon-minus" data-role="decrease-round-length"></i>
+              <span data-tooltip class="has-tip" title="Add 1 minute">
+                <i class="foundicon-plus" data-role="increase-round-length"></i>
+              </span>
+              <span data-tooltip class="has-tip" title="Sub 1 minute">
+                <i class="foundicon-minus" data-role="decrease-round-length"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -43,7 +47,9 @@
   <div data-element="main" class="main">
     <div class="row">
       <div class="large-6 columns">
-        <i class="foundicon-refresh" data-role="restart"></i>
+        <span data-tooltip class="has-tip" title="Restart">
+          <i class="foundicon-refresh" data-role="restart"></i>
+        </span>
       </div>
     </div>
     <div class="row">
@@ -79,5 +85,8 @@
   </script>
 
   <script src="release/poker-debug.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).foundation();
+  </script>
 </body>
 </html>
