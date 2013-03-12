@@ -26,6 +26,9 @@ class Collection
   last: ->
     @items.last()
 
+  reset: ->
+    @currentIndex = 0
+
   contains: (searchedItem) ->
     @items.any (item) -> item.equals(searchedItem)
 

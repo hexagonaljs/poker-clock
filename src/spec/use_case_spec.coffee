@@ -6,6 +6,10 @@ describe 'UseCase', ->
   beforeEach =>
     @round = new Round(new Duration(1))
     @useCase = new UseCase(@round)
+    @blind1 = new Blind(10, 20)
+    @blind2 = new Blind(20, 40)
+    @useCase.addBlind(@blind1)
+    @useCase.addBlind(@blind2)
 
   it "resets round on start", =>
     spyOn(@round, 'reset')
@@ -32,12 +36,8 @@ describe 'UseCase', ->
       expect(@useCase.switchToNextRound).toHaveBeenCalled()
 
   describe 'current blinds', =>
-    beforeEach =>
-      @blind = new Blind(10, 20)
-      @useCase.addBlind(@blind)
-
     it 'points to the first blinds initially', =>
-      expect(@useCase.currentBlind().equals(@blind)).toBe(true)
+      expect(@useCase.currentBlind().equals(@blind1)).toBe(true)
 
   describe 'switch to next round', =>
     it 'resets round', =>
@@ -46,12 +46,8 @@ describe 'UseCase', ->
       expect(@round.reset).toHaveBeenCalled()
 
     it 'increases blinds', =>
-      blinds1 = new Blind(10,20)
-      blinds2 = new Blind(20,40)
-      @useCase.addBlind(blinds1)
-      @useCase.addBlind(blinds2)
       @useCase.switchToNextRound()
-      expect(@useCase.currentBlind().equals(blinds2)).toBe(true)
+      expect(@useCase.currentBlind().equals(@blind2)).toBe(true)
 
   describe 'change round length', =>
     beforeEach =>
@@ -67,19 +63,25 @@ describe 'UseCase', ->
 
   describe 'add blinds', =>
     it 'adds to blind to the enabled blinds array', =>
-      blind = new Blind(10,20)
+      blind = new Blind(50, 100)
       @useCase.addBlind(blind)
       expect(@useCase.enabledBlinds).toContain(blind)
 
   describe 'remove blinds', =>
-    beforeEach =>
-      @blind = new Blind(10,20)
-      @useCase.addBlind(@blind)
-
     it 'contains the blind initially', =>
-      expect(@useCase.enabledBlinds.contains(@blind)).toBe(true)
+      expect(@useCase.enabledBlinds.contains(@blind1)).toBe(true)
 
     it 'removes the blind', =>
-      @useCase.removeBlind(@blind)
-      expect(@useCase.enabledBlinds.contains(@blind)).toBe(false)
+      @useCase.removeBlind(@blind1)
+      expect(@useCase.enabledBlinds.contains(@blind1)).toBe(false)
 
+  describe 'restart', =>
+    it 'resets the round', =>
+      spyOn(@round, 'reset')
+      @useCase.restart()
+      expect(@round.reset).toHaveBeenCalled()
+
+    it 'resets the blinds', =>
+      @useCase.switchToNextRound()
+      @useCase.restart()
+      expect(@useCase.currentBlind().equals(@blind1)).toBe(true)

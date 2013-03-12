@@ -34,5 +34,9 @@ class UseCase
     @enabledBlinds.next()
     @round.reset()
 
+  restart: =>
+    @round.reset()
+    @enabledBlinds.reset()
+
   currentBlind: =>
     @enabledBlinds.current()

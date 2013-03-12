@@ -4,15 +4,19 @@ class Glue
     LogAll(@gui)
 
     After(@useCase, 'setup', =>
+      @gui.switchToSetup()
       @gui.updateSelectedBlinds(@useCase.availableBlinds, @useCase.enabledBlinds)
       @gui.updateRoundLength(@useCase.round)
     )
 
     After(@useCase, 'start', =>
       @clock.start()
-      @gui.hideSetup()
+      @gui.switchToMainView()
       @gui.updateTimeLeft(@useCase.round.timeLeft())
       @gui.updateBlinds(@useCase.currentBlind()))
+
+    After(@useCase, 'restart', => @gui.switchToSetup())
+
     After(@useCase, 'secondElapsed', => @gui.updateTimeLeft(@useCase.round.timeLeft()))
     After(@useCase, 'switchToNextRound', => @gui.updateBlinds(@useCase.currentBlind()))
     AfterAll(@useCase, [
@@ -29,6 +33,7 @@ class Glue
     After(@clock, 'tick', => @useCase.secondElapsed())
 
     After(@gui, 'startClicked', => @useCase.start())
+    After(@gui, 'restartClicked', => @useCase.restart())
     After(@gui, 'increaseRoundLengthClicked', => @useCase.increaseRoundLength())
     After(@gui, 'decreaseRoundLengthClicked', => @useCase.decreaseRoundLength())
     After(@gui, 'addBlindClicked', (blind) => @useCase.addBlind(blind))

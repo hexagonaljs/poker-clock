@@ -47,3 +47,15 @@ describe "Collection", =>
     it "next switches to the next item", =>
       @collection.next()
       expect(@collection.current()).toEqual("bob")
+
+  describe "reset", =>
+    beforeEach =>
+      @collection = new Collection(["alice", "bob"])
+      @collection.next()
+
+    it "points to the second item", =>
+      expect(@collection.current()).toBe("bob")
+
+    it "points to the first item after reset", =>
+      @collection.reset()
+      expect(@collection.current()).toBe("alice")

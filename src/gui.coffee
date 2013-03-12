@@ -1,10 +1,13 @@
 class Gui
   constructor: ->
     $('[data-role=start]').click => @startClicked()
+    $('[data-role=restart]').click => @restartClicked()
     $('[data-role=increase-round-length]').click => @increaseRoundLengthClicked()
     $('[data-role=decrease-round-length]').click => @decreaseRoundLengthClicked()
 
   startClicked: ->
+
+  restartClicked: ->
 
   increaseRoundLengthClicked: ->
 
@@ -13,6 +16,14 @@ class Gui
   addBlindClicked: (blind) ->
 
   removeBlindClicked: (blind) ->
+
+  switchToSetup: =>
+    @hideMainView()
+    @showSetup()
+
+  switchToMainView: =>
+    @hideSetup()
+    @showMainView()
 
   updateRoundLength: (round) ->
     data = {roundLength: round.lengthInMinutes()}
@@ -46,8 +57,23 @@ class Gui
     element = @renderElement('#blinds-template', data)
     $('[data-element=blinds]').html(element)
 
-  hideSetup: ->
-    $('[data-element=setup]').hide()
+  showSetup: =>
+    @getSetupElement().show()
+
+  hideSetup: =>
+    @getSetupElement().hide()
+
+  showMainView: =>
+    @getMainViewElement().show()
+
+  hideMainView: =>
+    @getMainViewElement().hide()
+
+  getSetupElement: ->
+    $('[data-element=setup]')
+
+  getMainViewElement: ->
+    $('[data-element=main]')
 
   getElementForBlind: (index) ->
     $("[data-blind-id=#{index}]")
