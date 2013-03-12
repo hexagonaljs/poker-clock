@@ -1,45 +1,45 @@
 class Glue
-  constructor: (@useCase, @gui, @storage, @clock)->
-    LogAll(@useCase)
+  constructor: (@pokerClock, @gui, @storage, @clock)->
+    LogAll(@pokerClock)
     LogAll(@gui)
 
-    After(@useCase, 'setup', =>
+    After(@pokerClock, 'setup', =>
       @gui.switchToSetup()
-      @gui.updateSelectedBlinds(@useCase.availableBlinds, @useCase.enabledBlinds)
-      @gui.updateRoundLength(@useCase.round)
+      @gui.updateSelectedBlinds(@pokerClock.availableBlinds, @pokerClock.enabledBlinds)
+      @gui.updateRoundLength(@pokerClock.round)
     )
 
-    After(@useCase, 'start', =>
+    After(@pokerClock, 'start', =>
       @clock.start()
       @gui.switchToMainView()
-      @gui.updateTimeLeft(@useCase.round.timeLeft())
-      @gui.updateBlinds(@useCase.currentBlind()))
+      @gui.updateTimeLeft(@pokerClock.round.timeLeft())
+      @gui.updateBlinds(@pokerClock.currentBlind()))
 
-    After(@useCase, 'restart', =>
+    After(@pokerClock, 'restart', =>
       @clock.stop()
       @gui.switchToSetup())
 
-    After(@useCase, 'pause', => @clock.toggle())
+    After(@pokerClock, 'pause', => @clock.toggle())
 
-    After(@useCase, 'secondElapsed', => @gui.updateTimeLeft(@useCase.round.timeLeft()))
-    After(@useCase, 'switchToNextRound', => @gui.updateBlinds(@useCase.currentBlind()))
-    AfterAll(@useCase, [
+    After(@pokerClock, 'secondElapsed', => @gui.updateTimeLeft(@pokerClock.round.timeLeft()))
+    After(@pokerClock, 'switchToNextRound', => @gui.updateBlinds(@pokerClock.currentBlind()))
+    AfterAll(@pokerClock, [
       'setRoundLength',
       'increaseRoundLength',
       'decreaseRoundLength'],
-      => @gui.updateRoundLength(@useCase.round))
-    AfterAll(@useCase, [
+      => @gui.updateRoundLength(@pokerClock.round))
+    AfterAll(@pokerClock, [
       'addBlind',
       'removeBlind'],
-      => @gui.updateSelectedBlinds(@useCase.availableBlinds, @useCase.enabledBlinds))
+      => @gui.updateSelectedBlinds(@pokerClock.availableBlinds, @pokerClock.enabledBlinds))
 
 
-    After(@clock, 'tick', => @useCase.secondElapsed())
+    After(@clock, 'tick', => @pokerClock.secondElapsed())
 
-    After(@gui, 'startClicked', => @useCase.start())
-    After(@gui, 'restartClicked', => @useCase.restart())
-    After(@gui, 'pauseClicked', => @useCase.pause())
-    After(@gui, 'increaseRoundLengthClicked', => @useCase.increaseRoundLength())
-    After(@gui, 'decreaseRoundLengthClicked', => @useCase.decreaseRoundLength())
-    After(@gui, 'addBlindClicked', (blind) => @useCase.addBlind(blind))
-    After(@gui, 'removeBlindClicked', (blind) => @useCase.removeBlind(blind))
+    After(@gui, 'startClicked', => @pokerClock.start())
+    After(@gui, 'restartClicked', => @pokerClock.restart())
+    After(@gui, 'pauseClicked', => @pokerClock.pause())
+    After(@gui, 'increaseRoundLengthClicked', => @pokerClock.increaseRoundLength())
+    After(@gui, 'decreaseRoundLengthClicked', => @pokerClock.decreaseRoundLength())
+    After(@gui, 'addBlindClicked', (blind) => @pokerClock.addBlind(blind))
+    After(@gui, 'removeBlindClicked', (blind) => @pokerClock.removeBlind(blind))

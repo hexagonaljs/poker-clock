@@ -1,5 +1,5 @@
 #<< utils
-#<< use_case
+#<< poker_clock
 #<< gui
 #<< glue
 #<< clock
@@ -9,11 +9,11 @@ class App
   constructor: ->
     clock        = new Clock()
     round        = new Round(Config.getRoundDuration())
-    useCase      = new UseCase(round, Config.getAvailableBlinds(), Config.getEnabledBlinds())
+    pokerClock   = new PokerClock(round, Config.getAvailableBlinds(), Config.getEnabledBlinds())
     gui          = new Gui()
-    glue         = new Glue(useCase, gui, localStorage, clock)
+    glue         = new Glue(pokerClock, gui, localStorage, clock)
 
-    useCase.setup()
+    pokerClock.setup()
 
 new App()
 

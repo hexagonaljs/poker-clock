@@ -1,6 +1,6 @@
 #<< sorted_blinds_collection
 
-class UseCase
+class PokerClock
   constructor: (@round, availableBlinds, enabledBlinds) ->
     @availableBlinds = new SortedBlindsCollection(availableBlinds)
     @enabledBlinds = new SortedBlindsCollection(enabledBlinds)
