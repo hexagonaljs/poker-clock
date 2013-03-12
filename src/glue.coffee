@@ -15,7 +15,9 @@ class Glue
       @gui.updateTimeLeft(@useCase.round.timeLeft())
       @gui.updateBlinds(@useCase.currentBlind()))
 
-    After(@useCase, 'restart', => @gui.switchToSetup())
+    After(@useCase, 'restart', =>
+      @clock.stop()
+      @gui.switchToSetup())
 
     After(@useCase, 'secondElapsed', => @gui.updateTimeLeft(@useCase.round.timeLeft()))
     After(@useCase, 'switchToNextRound', => @gui.updateBlinds(@useCase.currentBlind()))

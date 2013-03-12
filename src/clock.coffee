@@ -2,7 +2,10 @@ class Clock
   constructor: ->
 
   start: ->
-    setInterval((=> @tick()), @oneSecondInMilliseconds())
+    @interval = setInterval((=> @tick()), @oneSecondInMilliseconds())
+
+  stop: ->
+    clearInterval(@interval)
 
   tick: ->
 
